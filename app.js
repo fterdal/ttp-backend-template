@@ -1,18 +1,36 @@
 const express = require("express");
 const morgan = require("morgan");
+const path = require("path");
 const app = express();
+const db = require("./database/db");
 const apiRouter = require("./api");
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 
-app.use(morgan("dev"));
-
-app.use("/api", apiRouter);
+app.use(morgan("dev")); // logging middleware
+app.use(express.static(path.join(__dirname, "public"))); // serve static files from public folder
+app.use("/api", apiRouter); // mount api router
 
 app.get("/", (req, res) => {
-  res.send("<h1>Welcome to the TTP Backend Template!</h1>");
+  res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
-app.listen(8080, () => {
-  console.log("Server is running on port 3000");
+// error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send("Something broke!");
 });
+
+const runApp = async () => {
+  try {
+    await db.sync();
+    console.log("✅ Connected to the database");
+    app.listen(PORT, () => {
+      console.log(`🚀 Server is running on port ${PORT}`);
+    });
+  } catch (err) {
+    console.error("❌ Unable to connect to the database:", err);
+  }
+};
+
+runApp();

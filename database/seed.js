@@ -8,6 +8,8 @@ const seed = async () => {
     { name: "Fluffy" },
     { name: "Smokey" },
   ]);
+  console.log("🌱 Seeded the database");
+  db.close();
 };
 
 seed();

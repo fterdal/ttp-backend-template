@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Cat = require("../db/cat");
+const Cat = require("../database/cat");
 
 // GET all cats
 router.get("/", async (req, res) => {
