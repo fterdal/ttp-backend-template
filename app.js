@@ -11,10 +11,6 @@ app.use(morgan("dev")); // logging middleware
 app.use(express.static(path.join(__dirname, "public"))); // serve static files from public folder
 app.use("/api", apiRouter); // mount api router
 
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
-});
-
 // error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
