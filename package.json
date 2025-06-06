@@ -5,6 +5,7 @@
   "scripts": {
     "seed": "node database/seed.js",
     "start": "node app.js",
+    "build": "npm install",
     "dev": "nodemon app.js"
   },
   "keywords": [],
