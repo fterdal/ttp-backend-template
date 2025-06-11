@@ -1,5 +1,6 @@
-// const db = require("./db");
-const { db, Cat, Owner } = require("./index");
+const db = require("./db");
+const { Cat } = require("./cat");
+const { Owner } = require("./owner");
 
 const seed = async () => {
   await db.sync({ force: true }); // Drop and recreate tables
