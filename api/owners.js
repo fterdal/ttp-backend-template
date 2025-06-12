@@ -4,6 +4,7 @@ const { Owner, Cat } = require("../database");
 
 // GET /api/owners - Get all owners
 router.get("/", async (req, res, next) => {
+  console.log("owners GET / API");
   const owners = await Owner.findAll({
     include: [Cat],
   });
